@@ -1,6 +1,7 @@
 const Router = require("express").Router();
 const notes = require("../db/db.json");
 const fs = require("fs");
+const uuid = require("../helpers/uuid");
 
 //Get
 Router.get("/", (req, res) => {
@@ -13,5 +14,10 @@ Router.get("/", (req, res) => {
     }
   });
 });
+
+//Post
+Router.post("/", (req, res) => {
+const newNote = {id:}
+})
 
 module.exports = Router;
