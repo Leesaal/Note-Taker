@@ -8,3 +8,8 @@ const notes = require("./routes/notes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//listen to port
+app.listen(PORT, () =>
+  console.log(`App listening on http://localhost:${PORT}`)
+);
