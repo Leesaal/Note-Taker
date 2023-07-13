@@ -10,6 +10,9 @@ const api = require("./routes/api");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/", api);
 app.use("/notes", notes);
 
