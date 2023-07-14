@@ -1,58 +1,70 @@
 const Router = require("express").Router();
-const notes = require("../db/db.json");
 const fs = require("fs");
 const uuid = require("uuid");
 
-//Get
 Router.get("/", (req, res) => {
   fs.readFile("../db/db.json", "utf-8", (err, data) => {
+    if (err) {
+      res.status(500).send("Unable to read notes");
+    }
+
     try {
-      const note = JSON.parse(data);
-      return res.json(note);
+      const notes = JSON.parse(data);
+      res.json(notes);
     } catch (err) {
-      console.log(err);
+      res.status(500).send("Unable to read notes");
     }
   });
 });
 
-//Post
+// Post
 Router.post("/", (req, res) => {
-  const newNote = { id: uuid.v4(), ...req.body };
-  notes.push(newNote);
-
-  // write in db json file
-  try {
-    fs.writeFile("../db/db.json", JSON.stringify(notes), (err) => {
-      res.send("Note has been created");
-    });
-  } catch (err) {
-    res.send("Error posting note");
-  }
-});
-
-//Delete
-Router.delete("/:id", (req, res) => {
-  const id = req.params.id;
-
-  fs.readFile("./db/db.json", "utf8", (err, data) => {
+  fs.readFile("../db/db.json", "utf-8", (err, data) => {
     if (err) {
-      res.status(500).send("Failed to read file to delete note");
-      return;
+      res.status(500).send("Note has not been posted");
     }
-    try {
-      var noteData = JSON.parse(data);
-      noteData = noteData.filter((item) => item.id !== id);
 
-      // write to db json file
-      fs.writeFile("./db/db.json", JSON.stringify(noteData), (err) => {
+    try {
+      const notes = JSON.parse(data);
+      const newNote = { id: uuid.v4(), ...req.body };
+      notes.push(newNote);
+
+      fs.writeFile("../db/db.json", JSON.stringify(notes), (err) => {
         if (err) {
-          res.status(500).send("Failed to write deleted note");
+          res.status(500).send("Note has not been posted");
         } else {
-          res.send("Note has been deleted");
+          res.send("Note has been created");
         }
       });
     } catch (err) {
-      res.send("Error deleting note");
+      res.status(500).send("Note has not been posted");
+    }
+  });
+});
+
+// Delete
+Router.delete("/:id", (req, res) => {
+  const noteId = req.params.id;
+
+  fs.readFile("../db/db.json", "utf-8", (err, data) => {
+    if (err) {
+      res.status(500).send("Note has not been deleted");
+      return;
+    }
+
+    try {
+      const notes = JSON.parse(data);
+      const filterDb = notes.filter((obj) => obj.id !== noteId);
+
+      fs.writeFile("../db/db.json", JSON.stringify(filterDb), (err) => {
+        if (err) {
+          res.status(500).send("Note has not been deleted");
+        } else {
+          res.send("Note was deleted");
+        }
+      });
+    } catch (err) {
+      res.status(500).send("Note has not been deleted");
     }
   });
 });
