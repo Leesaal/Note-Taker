@@ -6,6 +6,8 @@
 
 [Result](#result)
 
+[Link](#link)
+
 [Installation](#installation)
 
 [Usage](#usage)
@@ -24,10 +26,13 @@ This program is a note taking application where you can save notes you need to r
 
 <img width="1439" alt="Screenshot 2023-07-14 at 22 46 15" src="https://github.com/Leesaal/Note-Taker/assets/118930290/c36f065c-a350-4442-b122-bc90d31f8d5c">
 
+# Link
+
+https://notetakingapp-leesa-1e1fb1970e72.herokuapp.com/
 
 ## Installation
 
-Please install the following:
+Please install the following if running after cloning:
 npm install
 
 node server.js
