@@ -24,8 +24,7 @@ This program is a note taking application where you can save notes you need to r
 
 ## Result
 
-<img width="1439" alt="Screenshot 2023-07-14 at 22 46 15" src="https://github.com/Leesaal/Note-Taker/assets/118930290/398b119d-18a4-410f-8f44-23af430e2212">
-
+<img width="1429" alt="Screenshot 2023-07-14 at 22 46 15" src="https://github.com/Leesaal/Note-Taker/assets/118930290/31998dd4-803e-481d-91f7-183f413a1111">
 
 # Link
 
