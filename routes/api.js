@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 const notes = require("../db/db.json");
 const fs = require("fs");
-const uuid = require("../helpers/uuid");
+const uuid = require("uuid");
 
 //Get
 Router.get("/", (req, res) => {
